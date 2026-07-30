@@ -20,3 +20,11 @@ As an Applications Analyst, I often worked with UAT documentation. This project 
 ## Status
 
 🚧 Currently under development.
+
+## Tech Stack
+
+- Python
+- Streamlit
+- Claude API
+- PDF Processing
+- GitHub
