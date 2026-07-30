@@ -28,3 +28,11 @@ As an Applications Analyst, I often worked with UAT documentation. This project 
 - Claude API
 - PDF Processing
 - GitHub
+
+## Roadmap
+
+- [ ] Upload a BRD (PDF or DOCX)
+- [ ] Extract business requirements
+- [ ] Generate AI-powered UAT test cases
+- [ ] Export test cases to Excel
+- [ ] Add sample BRD and sample output
