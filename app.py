@@ -1,13 +1,13 @@
 from anthropic import Anthropic
 from dotenv import load_dotenv
 import os
+import streamlit as st
+import pdfplumber
 load_dotenv()
 
 client = Anthropic(
     api_key=os.getenv("ANTHROPIC_API_KEY")
 )
-import streamlit as st
-import pdfplumber
 
 st.set_page_config(page_title="AI UAT Script Generator")
 
