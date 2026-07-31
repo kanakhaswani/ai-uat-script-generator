@@ -37,3 +37,20 @@ if uploaded_file:
         text,
         height=400
     )
+response = client.messages.create(
+    model="claude-sonnet-4-5",
+    max_tokens=500,
+    messages=[
+        {
+            "role": "user",
+            "content": f"""
+Read this Business Requirements Document and summarize it in 5 bullet points.
+
+{text}
+"""
+        }
+    ]
+)
+
+st.subheader("Claude Summary")
+st.write(response.content[0].text)
