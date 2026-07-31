@@ -16,16 +16,17 @@ client = Anthropic(
 st.set_page_config(page_title="AI UAT Script Generator")
 
 st.title("AI UAT Script Generator")
-st.write("Upload a Business Requirements Document (BRD) to generate UAT test cases.")
+st.write("Upload a PDF document and Claude will summarize it.")
 
-# File uploader
+# Upload PDF
 uploaded_file = st.file_uploader(
-    "Choose a BRD file",
+    "Choose a PDF",
     type=["pdf"]
 )
 
-# Process uploaded file
 if uploaded_file:
+
+    st.success("✅ File uploaded!")
 
     text = ""
 
@@ -37,17 +38,17 @@ if uploaded_file:
             if page_text:
                 text += page_text + "\n"
 
-    st.success("BRD uploaded successfully!")
-
     st.subheader("Extracted Text")
+
     st.text_area(
         "Document Contents",
         text,
         height=300
     )
 
-    # Ask Claude to summarize
-    with st.spinner("Claude is reading your BRD..."):
+    st.write("🤖 Calling Claude...")
+
+    try:
 
         response = client.messages.create(
             model="claude-sonnet-4-5",
@@ -56,11 +57,7 @@ if uploaded_file:
                 {
                     "role": "user",
                     "content": f"""
-You are a Business Analyst.
-
-Read the following Business Requirements Document.
-
-Summarize it into 5 concise bullet points.
+Summarize the following document into 5 bullet points.
 
 {text}
 """
@@ -68,5 +65,14 @@ Summarize it into 5 concise bullet points.
             ]
         )
 
-    st.subheader("Claude Summary")
-    st.write(response.content[0].text)
+        st.success("✅ Claude responded!")
+
+        st.subheader("Claude Summary")
+
+        st.write(response.content[0].text)
+
+    except Exception as e:
+
+        st.error("Claude returned an error.")
+
+        st.exception(e)
